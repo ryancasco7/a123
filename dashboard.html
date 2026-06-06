@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — MathBOT</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="dashboard" class="page">
+  <header class="header">
+    <div class="header-inner">
+      <a href="dashboard.html" class="logo"><img src="logo.png" alt="MathBOT" class="logo-img"></a>
+      <div class="header-actions">
+        <button class="btn-icon" data-theme-toggle>🌓</button>
+        <button class="btn btn-outline btn-sm" data-logout>Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container content-area">
+    <h2 id="user-greeting" class="mb-2">Hello, User</h2>
+
+    <div class="stat-grid">
+      <div class="card stat-card">
+        <div class="card-icon">💰</div>
+        <div class="card-title">Total Earnings</div>
+        <div class="card-value" id="total-earnings">₱0.00</div>
+      </div>
+      <div class="card stat-card">
+        <div class="card-icon">👥</div>
+        <div class="card-title">Total Invites</div>
+        <div class="card-value" id="referral-count">0</div>
+        <small class="text-muted">Referral: <span id="referral-earnings">₱0.00</span></small>
+      </div>
+      <div class="card stat-card">
+        <div class="card-icon">💸</div>
+        <div class="card-title">Total Withdrawn</div>
+        <div class="card-value" id="total-withdrawn">₱0.00</div>
+      </div>
+      <div class="card stat-card">
+        <div class="card-icon">🎯</div>
+        <div class="card-title">Accuracy</div>
+        <div class="card-value" id="stat-accuracy">0%</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Statistics</div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">Questions Answered</div>
+          <div class="card-value" id="stat-answered">0</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Correct / Wrong</div>
+          <div class="card-value"><span id="stat-correct">0</span> / <span id="stat-wrong">0</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Your Referral Link</div>
+      <div class="card referral-box">
+        <p class="text-muted">Share your referral username:</p>
+        <code id="referral-username">username</code>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="section">
+        <div class="section-title">Daily Leaderboard</div>
+        <div class="card" id="daily-leaderboard"></div>
+      </div>
+      <div class="section">
+        <div class="section-title">Top Earners</div>
+        <div class="card" id="top-earners"></div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="section">
+        <div class="section-title">Notifications <span class="notify-wrap"><span id="notify-badge" class="hidden">0</span></span></div>
+        <div class="card" id="notification-list"></div>
+      </div>
+      <div class="section">
+        <div class="section-title">Recent Activity</div>
+        <div class="card" id="activity-feed"></div>
+      </div>
+    </div>
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="dashboard.html" data-nav="dashboard"><span class="nav-icon">📊</span>Dashboard</a>
+    <a href="game.html" data-nav="game"><span class="nav-icon">🎮</span>Play</a>
+    <a href="withdrawal.html" data-nav="withdrawal"><span class="nav-icon">💳</span>Withdraw</a>
+  </nav>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/db.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

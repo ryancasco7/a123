@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register — MathBOT</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="register">
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-header">
+        <a href="index.html" class="logo logo-center" style="margin-bottom:1rem;">
+          <img src="logo.png" alt="MathBOT" class="logo-img logo-img-lg">
+        </a>
+        <h1>Create Account</h1>
+        <p>Activation code required (₱159.00 value)</p>
+      </div>
+      <form id="register-form">
+        <div class="form-group">
+          <label for="name">Complete Name</label>
+          <input type="text" id="name" name="name" required placeholder="Juan Dela Cruz">
+        </div>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required placeholder="john123" pattern="[a-zA-Z0-9_]{3,20}">
+          <p class="form-hint">3–20 characters, letters, numbers, underscore</p>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" required placeholder="09171234567" pattern="09[0-9]{9}">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required placeholder="Create a password" minlength="6">
+        </div>
+        <div class="form-group">
+          <label for="activationCode">Activation Code</label>
+          <input type="text" id="activationCode" name="activationCode" required placeholder="MB-XXXX-XXXX-XXXX">
+        </div>
+        <div class="form-group">
+          <label for="referralUsername">Referral Username <span class="text-muted">(optional)</span></label>
+          <input type="text" id="referralUsername" name="referralUsername" placeholder="friend_username">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Register</button>
+      </form>
+      <div class="auth-footer">
+        <p>Already have an account? <a href="login.html">Login</a></p>
+        <p class="mt-1"><button class="btn-icon" data-theme-toggle>🌓</button></p>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/db.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

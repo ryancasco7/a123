@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Play — MathBOT</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="game" class="page">
+  <header class="header">
+    <div class="header-inner">
+      <a href="dashboard.html" class="logo"><img src="logo.png" alt="MathBOT" class="logo-img"></a>
+      <div class="header-actions">
+        <button class="btn-icon" data-theme-toggle>🌓</button>
+        <button class="btn btn-outline btn-sm" data-logout>Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="game-container">
+    <div class="game-balance-bar">
+      <span class="text-muted">Your Balance</span>
+      <strong id="game-balance">₱0.00</strong>
+    </div>
+
+    <div class="card game-question-card">
+      <div class="card-title">Current Question</div>
+      <div id="current-question">Loading...</div>
+      <p class="mt-1" style="opacity:0.8;font-size:0.85rem;">Correct = ₱0.02 · Wrong = ₱0.00</p>
+    </div>
+
+    <div class="card">
+      <form id="game-form">
+        <div class="form-group">
+          <label for="answer-input">Your Answer</label>
+          <input type="number" id="answer-input" step="any" required placeholder="Enter answer" autocomplete="off">
+        </div>
+        <div class="game-actions">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" id="skip-btn" class="btn btn-outline">Skip</button>
+        </div>
+      </form>
+      <div id="game-feedback" class="game-feedback"></div>
+    </div>
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="dashboard.html" data-nav="dashboard"><span class="nav-icon">📊</span>Dashboard</a>
+    <a href="game.html" data-nav="game"><span class="nav-icon">🎮</span>Play</a>
+    <a href="withdrawal.html" data-nav="withdrawal"><span class="nav-icon">💳</span>Withdraw</a>
+  </nav>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/db.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel — MathBOT</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="admin" class="page-admin">
+  <header class="header">
+    <div class="header-inner">
+      <a href="admin.html" class="logo">
+        <img src="logo.png" alt="MathBOT" class="logo-img">
+        <span class="logo-admin-label">Admin</span>
+      </a>
+      <div class="header-actions">
+        <button class="btn-icon" data-theme-toggle>🌓</button>
+        <button class="btn btn-outline btn-sm" data-logout>Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container content-area">
+    <h2 class="mb-2">Admin Dashboard</h2>
+
+    <div class="stat-grid">
+      <div class="card stat-card"><div class="card-title">Registered Users</div><div class="card-value" id="stat-total-users">0</div></div>
+      <div class="card stat-card"><div class="card-title">Activated Users</div><div class="card-value" id="stat-activated">0</div></div>
+      <div class="card stat-card"><div class="card-title">Earnings Paid</div><div class="card-value" id="stat-earnings-paid">₱0</div></div>
+      <div class="card stat-card"><div class="card-title">Referral Rewards</div><div class="card-value" id="stat-ref-rewards">₱0</div></div>
+      <div class="card stat-card"><div class="card-title">Pending Withdrawals</div><div class="card-value" id="stat-pending-wd">0</div></div>
+      <div class="card stat-card"><div class="card-title">Approved</div><div class="card-value" id="stat-approved-wd">0</div></div>
+      <div class="card stat-card"><div class="card-title">Rejected</div><div class="card-value" id="stat-rejected-wd">0</div></div>
+      <div class="card stat-card"><div class="card-title">Activation Codes</div><div class="card-value" id="stat-codes">0</div></div>
+      <div class="card stat-card"><div class="card-title">Daily New Users</div><div class="card-value" id="stat-daily-users">0</div></div>
+      <div class="card stat-card"><div class="card-title">Daily Earnings</div><div class="card-value" id="stat-daily-earnings">₱0</div></div>
+    </div>
+
+    <div class="grid-2 mb-2">
+      <div class="card chart-card"><div class="section-title">Users (7 Days)</div><canvas id="chart-users"></canvas></div>
+      <div class="card chart-card"><div class="section-title">Earnings (7 Days)</div><canvas id="chart-earnings"></canvas></div>
+    </div>
+
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-panel="codes">Activation Codes</button>
+      <button class="admin-tab" data-panel="users">Users</button>
+      <button class="admin-tab" data-panel="withdrawals">Withdrawals</button>
+      <button class="admin-tab" data-panel="activity">Activity</button>
+    </div>
+
+    <div id="panel-codes" class="admin-panel active">
+      <div class="admin-toolbar">
+        <button id="generate-code-btn" class="btn btn-primary btn-sm">Generate Code</button>
+        <input type="number" id="code-count" value="5" min="1" max="50" style="width:70px;">
+        <button id="generate-multi-btn" class="btn btn-outline btn-sm">Generate Multiple</button>
+        <div class="filter-pills">
+          <button class="active" data-code-filter="all">All</button>
+          <button data-code-filter="unused">Unused</button>
+          <button data-code-filter="used">Used</button>
+        </div>
+      </div>
+      <div class="card table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Code ID</th><th>Generated</th><th>Status</th><th>User</th><th>Actions</th></tr></thead>
+          <tbody id="codes-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="panel-users" class="admin-panel">
+      <div class="admin-toolbar">
+        <input type="search" id="user-search" placeholder="Search users...">
+        <button id="export-users-btn" class="btn btn-outline btn-sm">Export CSV</button>
+      </div>
+      <div class="card table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Name</th><th>Username</th><th>Phone</th><th>Earnings</th><th>Referrals</th><th>Registered</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="users-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="panel-withdrawals" class="admin-panel">
+      <div class="admin-toolbar">
+        <button id="export-withdrawals-btn" class="btn btn-outline btn-sm">Export CSV</button>
+      </div>
+      <div class="card table-wrap">
+        <table class="data-table">
+          <thead><tr><th>User</th><th>Amount</th><th>GCash Name</th><th>GCash No.</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="admin-withdrawals-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="panel-activity" class="admin-panel">
+      <div class="card" id="admin-activity"></div>
+    </div>
+  </main>
+
+  <div id="edit-user-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Edit User</h3>
+        <button class="btn-icon" data-close-modal>✕</button>
+      </div>
+      <input type="hidden" id="edit-user-id">
+      <div class="form-group">
+        <label for="edit-name">Name</label>
+        <input type="text" id="edit-name">
+      </div>
+      <div class="form-group">
+        <label for="edit-phone">Phone</label>
+        <input type="tel" id="edit-phone">
+      </div>
+      <div class="form-group">
+        <label for="edit-earnings">Earnings (PHP)</label>
+        <input type="number" id="edit-earnings" step="0.01">
+      </div>
+      <button id="save-edit-user" class="btn btn-primary btn-block">Save Changes</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/db.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
